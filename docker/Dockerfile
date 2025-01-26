@@ -37,7 +37,7 @@ RUN virtualenv -p /usr/bin/python3.9 /srv/.env
 
 #********************** Set up LOCAL server env **********************
 WORKDIR /srv
-RUN git clone https://github.com/kdmukai/nostrtool.git
+RUN git clone https://github.com/KrajnakM/nostrtool.git
 
 WORKDIR /srv/nostrtool
 RUN git clone https://github.com/kdmukai/python-nostr.git
@@ -46,6 +46,7 @@ WORKDIR /srv/nostrtool/python-nostr
 RUN git checkout dev
 
 WORKDIR /srv/nostrtool
+RUN sed -i '/Flask==2.2.2/a Werkzeug==2.2.3' requirements.txt
 RUN /srv/.env/bin/pip install -r requirements.txt --no-cache-dir
 
 WORKDIR /srv/nostrtool/src
